@@ -1,0 +1,125 @@
+#!/bin/bash
+
+# Welcome to superlocate, a locate wrapper that makes browsing hierarchical filesystems easier. It launches locate on your first argument, and then filters the results so that each of the arguments are included. This way, you no longer need to remember where your files are; just remembering the filename, as well as a few of the directories (which you can now see as tags), in any order, will suffice.
+#
+# What it does:
+# It launches locate with your first argument. If the only result is a directory, it will automatically cd to it. If the only result is a file, it will cd to the directory that contains it. If there are more than one results, you can refine your search by adding more arguments.
+#
+# Dependencies:
+# - locate from the findutils or mlocate metapackage
+# - dmenu from the suckless-tools metapackage
+# - scd (super cd)
+# 
+# Installation:
+# - Place this script, as well as scd, in your PATH. You might want to call it sl (short for superlocate) for quick access.
+#
+# Examples:
+# user@localhost$ sl strawberry beatles
+#
+# This will search for any file or directory containing both the strings "Strawberry" and "Beatles". This way, you can locate the song "Strawberry Fields Forever" without needing to remember that it was on The Magical Mystery Tour.
+#
+# But wait a second! The song appears on multiple records, and because you are such a Beatles fan, you've got a copy of them all. Here's the output of our command:
+#
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
+# /home/user/music/Beatles/Imagine/Strawberry_Fields_Forever.ogg
+# /home/user/music/Beatles/Love/Strawberry_Fields_Forever.ogg
+# /home/user/music/Beatles/Anthology_2_CD_2/Strawberry_Fields_Forever.ogg
+#
+# In order to get the version on The Magical Mystery Tour, all we have to do is add another filter.
+#
+# user@localhost$ !! tour
+# user@localhost$ sl strawberry beatles tour
+#
+# Output:
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
+#
+# You have now been cd'd into /home/user/music/Beatles/The_Magical_Mystery_Tour and all you have to do to play the song is xdg-open Strawberry_Fields_Forever.ogg.
+#
+#
+# Example 2:
+#
+# Let's say you want to play the whole Magical Mystery Tour album. At first you'd probably try:
+#
+# user@localhost$ sl mystery tour
+#
+# However, this will output all the songs on the album as well, since they match the query. The output will be:
+#
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/Magical_Mystery_Tour.ogg
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/The_Fool_on_the_Hill.ogg
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/Flying.ogg
+# /home/user/music/Beatles/The_Magical_Mystery_Tour/Blue_Jay_Way.ogg
+# etc.
+#
+# Because both locate and grep take regexp, this can be prevented very easily:
+#
+# user@localhost$ sl mystery tour$
+#
+# The $ means the string has to end there, so anything inside the directory is not included. The directory will be the only result, and you will be cd'd into it.
+#
+#
+# NEW: from now on, if there's more than one result, an instance of dmenu will be launched to let you choose from the results.
+#
+
+
+# Launch locate with the first argument as argument.
+all="$(locate -i -r $1)"
+
+# Filter results using grep so that each argument is included.
+for i in "${@:2}"
+	do
+		all="$(echo "$all" | grep -i "$i")"
+	done
+
+# Notify the user of the results.
+echo "$all"
+
+numofresults=$(echo "$all" | wc -l)
+
+# If there are no results, quit.
+if
+	[[ $numofresults -eq 0 ]]
+	then echo "No results."
+	exit
+fi
+
+if
+	# If there is only one result, cd to the directory, or the directory containing the file.
+	[ $numofresults -eq 1 ]
+	then
+		cd $(idirname $all)
+
+	# If there are more than one results, choose one of them with dmenu
+ 	else
+		height=$(echo "$all" | wc -l)
+
+		if
+		 	[[ $height -gt 30 ]]
+		 	then heightfit=30
+		 	else heightfit=$height
+		 fi
+		 
+		 choice="$(echo "$all" | dmenu -i -l $heightfit)"
+		 cd $(idirname $choice)
+fi
+
+# Finally, give the user a clue about what's in this directory for userfriendliness
+ls
+
+
+
+
+# Some notes:
+# - everything is case-insensitive;
+# - the order of your arguments doesn't matter. You can now think in terms of tags, not hierarchies!
+#
+# To-do:
+# - add command-line switches, for example if an operation must be case-sensitive, or only directories are to be located;
+# - automatically rearrange the arguments from bigger strings to fewer, in order to reduce search time. locate a | grep verylongstring takes longer than locate verylongstring | grep a, for example;
+# - If all results will bring you to the same directory, skip the dmenu and go to that directory immediately.
+#
+# This program was inspired by fasd. The main differences:
+# - fasd keeps track of its own database, which is built by cd'ing to directories, while superlocate uses locate's database, which includes the entire filesystem, not just the directories you've used before;
+# - fasd takes a little bit of time to update the database each time you use cd. Superlocate is updated when crond updates locate's database, or when you manually initialize updatedb. This way, it does not interfere with your workflow;
+# - most importantly, superlocate does not care about the order of the arguments. This way, you don't have to memorize what your filesystem hierarchy looks like.
+#
