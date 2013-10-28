@@ -23,21 +23,22 @@ superlocate
  But wait a second! The song appears on multiple records, and because you are such a Beatles fan, you've got a copy of them all. Here's the output of our command:
 
 ```
- /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
- /home/user/music/Beatles/Imagine/Strawberry_Fields_Forever.ogg
- /home/user/music/Beatles/Love/Strawberry_Fields_Forever.ogg
- /home/user/music/Beatles/Anthology_2_CD_2/Strawberry_Fields_Forever.ogg
+/home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
+/home/user/music/Beatles/Imagine/Strawberry_Fields_Forever.ogg
+/home/user/music/Beatles/Love/Strawberry_Fields_Forever.ogg
+/home/user/music/Beatles/Anthology_2_CD_2/Strawberry_Fields_Forever.ogg
 ```
 
  In order to get the version on The Magical Mystery Tour, all we have to do is add another filter.
 
 ```
- user@localhost$ !! tour
- user@localhost$ sl strawberry beatles tour
+user@localhost$ !! tour
+user@localhost$ sl strawberry beatles tour
 ```
 
  Output:
-` /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg`
+
+`/home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg`
 
  You have now been cd'd into /home/user/music/Beatles/The_Magical_Mystery_Tour and all you have to do to play the song is xdg-open Strawberry_Fields_Forever.ogg.
 
@@ -51,12 +52,12 @@ superlocate
  However, this will output all the songs on the album as well, since they match the query. The output will be:
 
 ```
- /home/user/music/Beatles/The_Magical_Mystery_Tour/
- /home/user/music/Beatles/The_Magical_Mystery_Tour/Magical_Mystery_Tour.ogg
- /home/user/music/Beatles/The_Magical_Mystery_Tour/The_Fool_on_the_Hill.ogg
- /home/user/music/Beatles/The_Magical_Mystery_Tour/Flying.ogg
- /home/user/music/Beatles/The_Magical_Mystery_Tour/Blue_Jay_Way.ogg
- etc.
+/home/user/music/Beatles/The_Magical_Mystery_Tour/
+/home/user/music/Beatles/The_Magical_Mystery_Tour/Magical_Mystery_Tour.ogg
+/home/user/music/Beatles/The_Magical_Mystery_Tour/The_Fool_on_the_Hill.ogg
+/home/user/music/Beatles/The_Magical_Mystery_Tour/Flying.ogg
+/home/user/music/Beatles/The_Magical_Mystery_Tour/Blue_Jay_Way.ogg
+etc.
 ```
 
  Because both locate and grep take regexp, this can be prevented very easily:
