@@ -61,10 +61,10 @@
 
 
 # Launch locate with the first argument as argument.
-all="$(find -iregex $1)"
+all="$(find *)"
 
 # Filter results using grep so that each argument is included.
-for i in "${@:2}"
+for i in "${@:1}"
 	do
 		all="$(echo "$all" | grep -i "$i")"
 	done
