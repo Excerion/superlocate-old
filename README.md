@@ -12,7 +12,8 @@ superlocate
  - [idirname](https://github.com/Antithesisx/idirname)
  
 ### Installation
- - Place sl, as well as idirname, in your PATH. (sl stands for superlocate.)
+ - Place sl, as well as idirname, in your PATH. (sl stands for superlocate.);
+ - make sure they're executable.
 
 ### Examples
 #### Example 1
