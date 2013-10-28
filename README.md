@@ -16,7 +16,7 @@ superlocate
 
 ### Examples
 #### Example 1
- user@localhost$ sl strawberry beatles
+`user@localhost$ sl strawberry beatles`
 
  This will search for any file or directory containing both the strings "Strawberry" and "Beatles". This way, you can locate the song "Strawberry Fields Forever" without needing to remember that it was on The Magical Mystery Tour.
 
