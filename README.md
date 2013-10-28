@@ -12,7 +12,7 @@ superlocate
  - [idirname](https://github.com/Antithesisx/idirname)
  
 ### Installation
- - Place this script, as well as scd, in your PATH. You might want to call it sl (short for superlocate) for quick access.
+ - Place sl, as well as idirname, in your PATH. (sl stands for superlocate.)
 
 ### Examples
 #### Example 1
