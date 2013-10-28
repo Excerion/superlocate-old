@@ -7,13 +7,18 @@ superlocate
  It launches locate with your first argument. If the only result is a directory, it will automatically cd to it. If the only result is a file, it will cd to the directory that contains it. If there are more than one results, you can refine your search by adding more arguments.
 
 ### Dependencies
- - locate from the findutils or mlocate metapackage
- - dmenu from the suckless-tools metapackage
- - [idirname](https://github.com/Antithesisx/idirname)
+- locate from the findutils or mlocate metapackage
+- dmenu from the suckless-tools metapackage
+- [idirname](https://github.com/Antithesisx/idirname)
  
 ### Installation
- - Place sl, as well as idirname, in your PATH. (sl stands for superlocate.);
- - make sure they're executable.
+- Resolve the dependencies;
+- place sl in your PATH and make sure it's executable (sl stands for superlocate):
+
+```
+sudo cp sl /usr/bin/
+sudo chmod +x /usr/bin/sl
+```
 
 ### Examples
 #### Example 1
@@ -75,9 +80,9 @@ etc.
  - the order of your arguments doesn't matter. You can now think in terms of tags, not hierarchies!
 
 ### To-do
- - add command-line switches, for example if an operation must be case-sensitive, or only directories are to be located;
- - automatically rearrange the arguments from bigger strings to fewer, in order to reduce search time. locate a | grep verylongstring takes longer than locate verylongstring | grep a, for example;
- - If all results will bring you to the same directory, skip the dmenu and go to that directory immediately.
+ - Automatically rearrange the arguments from bigger strings to fewer, in order to reduce search time. locate a | grep verylongstring takes longer than locate verylongstring | grep a, for example;
+ - if all results will bring you to the same directory, skip the dmenu and go to that directory immediately;
+ - add command-line switches, for example if an operation must be case-sensitive, or only directories are to be located.
 
 ### fasd
  This program was inspired by fasd. The main differences:
