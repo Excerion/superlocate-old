@@ -9,7 +9,7 @@ superlocate
 ### Dependencies
  - locate from the findutils or mlocate metapackage
  - dmenu from the suckless-tools metapackage
- - scd (super cd)
+ - [idirname](https://github.com/Antithesisx/idirname)
  
 ### Installation
  - Place this script, as well as scd, in your PATH. You might want to call it sl (short for superlocate) for quick access.
