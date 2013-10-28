@@ -22,14 +22,17 @@ superlocate
 
  But wait a second! The song appears on multiple records, and because you are such a Beatles fan, you've got a copy of them all. Here's the output of our command:
 
-``` /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
+```
+ /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
  /home/user/music/Beatles/Imagine/Strawberry_Fields_Forever.ogg
  /home/user/music/Beatles/Love/Strawberry_Fields_Forever.ogg
- /home/user/music/Beatles/Anthology_2_CD_2/Strawberry_Fields_Forever.ogg```
+ /home/user/music/Beatles/Anthology_2_CD_2/Strawberry_Fields_Forever.ogg
+```
 
  In order to get the version on The Magical Mystery Tour, all we have to do is add another filter.
 
-``` user@localhost$ !! tour
+```
+ user@localhost$ !! tour
  user@localhost$ sl strawberry beatles tour
 ```
 
@@ -43,27 +46,27 @@ superlocate
 
  Let's say you want to play the whole Magical Mystery Tour album. At first you'd probably try:
 
- user@localhost$ sl mystery tour
+`user@localhost$ sl mystery tour`
 
  However, this will output all the songs on the album as well, since they match the query. The output will be:
 
+```
  /home/user/music/Beatles/The_Magical_Mystery_Tour/
  /home/user/music/Beatles/The_Magical_Mystery_Tour/Magical_Mystery_Tour.ogg
  /home/user/music/Beatles/The_Magical_Mystery_Tour/The_Fool_on_the_Hill.ogg
  /home/user/music/Beatles/The_Magical_Mystery_Tour/Flying.ogg
  /home/user/music/Beatles/The_Magical_Mystery_Tour/Blue_Jay_Way.ogg
  etc.
+```
 
  Because both locate and grep take regexp, this can be prevented very easily:
 
- user@localhost$ sl mystery tour$
+`user@localhost$ sl mystery tour$`
 
  The $ means the string has to end there, so anything inside the directory is not included. The directory will be the only result, and you will be cd'd into it.
 
 
  NEW: from now on, if there's more than one result, an instance of dmenu will be launched to let you choose from the results.
-
-
 
 ### Some notes
  - everything is case-insensitive;
