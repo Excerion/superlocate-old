@@ -19,6 +19,9 @@ superlocate
 sudo cp sl /usr/bin/
 sudo chmod +x /usr/bin/sl
 ```
+- If you hadn't installed locate before, update your database.
+
+`sudo updatedb`
 
 ### Examples
 #### Example 1
@@ -78,6 +81,7 @@ etc.
 ### Some notes
  - everything is case-insensitive;
  - the order of your arguments doesn't matter. You can now think in terms of tags, not hierarchies!
+ - The OS X version uses find because its locate doesn't take regex. It searches all files and folders in the working directory recursively.
 
 ### To-do
  - Automatically rearrange the arguments from bigger strings to fewer, in order to reduce search time. locate a | grep verylongstring takes longer than locate verylongstring | grep a, for example;
