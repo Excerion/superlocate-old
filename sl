@@ -87,7 +87,7 @@ if
 	# If there is only one result, cd to the directory, or the directory containing the file.
 	[ $numofresults -eq 1 ]
 	then
-		cd $(idirname $all)
+		cd "$(idirname "$all")"
 
 	# If there are more than one results, choose one of them with dmenu
  	else
@@ -99,8 +99,9 @@ if
 		 	else heightfit=$height
 		 fi
 		 
-		 choice="$(echo "$all" | dmenu -i -l $heightfit)"
-		 cd $(idirname $choice)
+		 choice="$(echo "$all" | dmenu -i -l $heightfit) | sed 's/ /\\ /g"
+		 choicefixed="$(idirname $choice)"
+		 cd "$choicefixed"
 fi
 
 # Finally, give the user a clue about what's in this directory for userfriendliness

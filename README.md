@@ -23,6 +23,10 @@ sudo chmod +x /usr/bin/sl
 
 `sudo updatedb`
 
+- Add an alias to your ~/.zshrc (or ~/.bashrc, if you use bash):
+
+`alias sl='source sl'`
+
 ### Examples
 #### Example 1
 `user@localhost$ sl strawberry beatles`
