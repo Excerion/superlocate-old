@@ -99,9 +99,8 @@ if
 		 	else heightfit=$height
 		 fi
 		 
-		 choice="$(echo "$all" | dmenu -i -l $heightfit) | sed 's/ /\\ /g"
-		 choicefixed="$(idirname $choice)"
-		 cd "$choicefixed"
+		 choice="$(echo "$all" | dmenu -i -l $heightfit)"
+		 cd "$(idirname "$choice")"
 fi
 
 # Finally, give the user a clue about what's in this directory for userfriendliness
