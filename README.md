@@ -6,27 +6,6 @@ superlocate
  What it does:
  It launches locate with your first argument. If the only result is a directory, it will automatically cd to it. If the only result is a file, it will cd to the directory that contains it. If there are more than one results, you can refine your search by adding more arguments.
 
-### Dependencies
-- locate from the findutils or mlocate metapackage
-- dmenu from the suckless-tools metapackage
-- [idirname](https://github.com/Antithesisx/idirname)
- 
-### Installation
-- Resolve the dependencies;
-- place sl in your PATH and make sure it's executable (sl stands for superlocate):
-
-```
-sudo cp sl /usr/bin/
-sudo chmod +x /usr/bin/sl
-```
-- If you hadn't installed locate before, update your database.
-
-`sudo updatedb`
-
-- Add an alias to your ~/.zshrc (or ~/.bashrc, if you use bash):
-
-`alias sl='source sl'`
-
 ### Examples
 #### Example 1
 `user@localhost$ sl strawberry beatles`
@@ -81,6 +60,28 @@ etc.
 
 
  NEW: from now on, if there's more than one result, an instance of dmenu will be launched to let you choose from the results.
+
+### Dependencies
+- locate from the findutils or mlocate metapackage
+- dmenu from the suckless-tools metapackage
+- [idirname](https://github.com/Antithesisx/idirname)
+ 
+### Installation
+- `git clone https://github.com/Antithesisx/superlocate.git`
+- Resolve the dependencies;
+- place sl in your PATH and make sure it's executable (sl stands for superlocate):
+
+```
+sudo cp sl /usr/bin/
+sudo chmod +x /usr/bin/sl
+```
+- If you hadn't installed locate before, update your database.
+
+`sudo updatedb`
+
+- Add an alias to your ~/.zshrc (or ~/.bashrc, if you use bash):
+
+`alias sl='source sl'`
 
 ### Some notes
  - everything is case-insensitive;
