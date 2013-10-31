@@ -69,8 +69,8 @@ The $ means the string has to end there, so anything inside the directory is not
 - place sl in your PATH and make sure it's executable (sl stands for superlocate):
 
 ```
-sudo cp sl /usr/bin/
-sudo chmod +x /usr/bin/sl
+sudo cp sl /usr/local/bin/
+sudo chmod +x /usr//local/bin/sl
 ```
 - If you hadn't installed locate before, update your database.
 
