@@ -8,11 +8,22 @@ superlocate
 
 ### Examples
 #### Example 1
+Let's say you're looking for a picture of the eiffel tower you took.
+
+`user@localhost$ sl photos france eiffel`
+
+ This will search for any file or directory containing all of the strings "photos," "france," and "eiffel". Here are the results:
+
+`/home/user/photos/holidays/france-2010/eiffel-tower.jpg`
+
+Since there's only one result, you're instantly cd'd to the directory containing the file. The command effectively expanded to `cd /home/user/photos/holidays/france-2010/`, except that you didn't need to remember / browse your filesystem tree. No need to keep track of how your data was organized; it's enough to give a few arguments that describe the file you're looking for. Even if you went to France more often and you forgot in which year you took that picture, this works.
+
+#### Example 2
 `user@localhost$ sl strawberry beatles`
 
  This will search for any file or directory containing both the strings "Strawberry" and "Beatles". This way, you can locate the song "Strawberry Fields Forever" without needing to remember that it was on The Magical Mystery Tour.
 
- But wait a second! The song appears on multiple records, and because you are such a Beatles fan, you've got a copy of them all. Here's the output of our command:
+ But wait a second! The song appears on multiple records, and because you are such a Beatles fan, you've got a copy of them all. Here are the matches:
 
 ```
 /home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg
@@ -21,21 +32,10 @@ superlocate
 /home/user/music/Beatles/Anthology_2_CD_2/Strawberry_Fields_Forever.ogg
 ```
 
- In order to get the version on The Magical Mystery Tour, all we have to do is add another filter.
-
-```
-user@localhost$ !! tour
-user@localhost$ sl strawberry beatles tour
-```
-
- Output:
-
-`/home/user/music/Beatles/The_Magical_Mystery_Tour/Strawberry_Fields_Forever.ogg`
-
- You have now been cd'd into /home/user/music/Beatles/The_Magical_Mystery_Tour and all you have to do to play the song is xdg-open Strawberry_Fields_Forever.ogg.
+A dmenu instance opens and presents all of these results. You select the top one. You have now been cd'd into /home/user/music/Beatles/The_Magical_Mystery_Tour and all you have to do to play the song is xdg-open Strawberry_Fields_Forever.ogg.
 
 
-#### Example 2
+#### Example 3
 
  Let's say you want to play the whole Magical Mystery Tour album. At first you'd probably try:
 
@@ -52,14 +52,12 @@ user@localhost$ sl strawberry beatles tour
 etc.
 ```
 
- Because both locate and grep take regexp, this can be prevented very easily:
+It's not very hard to just select one of them from the dmenu, but it's desirable to prevent this beforehand. Because both locate and grep take regexp, this can be done very easily:
 
 `user@localhost$ sl mystery tour$`
 
- The $ means the string has to end there, so anything inside the directory is not included. The directory will be the only result, and you will be cd'd into it.
+The $ means the string has to end there, so anything inside the directory is not included. The directory will be the only result, and you will be cd'd into it.
 
-
- NEW: from now on, if there's more than one result, an instance of dmenu will be launched to let you choose from the results.
 
 ### Dependencies
 - locate from the findutils or mlocate metapackage
