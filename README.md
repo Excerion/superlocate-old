@@ -1,10 +1,9 @@
 superlocate
 ===========
 
- Welcome to superlocate, a locate wrapper that makes browsing hierarchical filesystems easier. It launches locate on your first argument, and then filters the results so that each of the arguments are included. This way, you no longer need to remember where your files are; just remembering the filename, as well as a few of the directories (which you can now see as tags), in any order, will suffice.
+ Superlocate is a program that helps browsing filesystems in the CLI. It lets the user forget about the hierarchical nature of the filesystem, instead letting them see directories as tags. The directory structure itself remains unchanged, but the user can browse it as if it was a tag-based filesystem.
 
- What it does:
- It launches locate with your first argument. If the only result is a directory, it will automatically cd to it. If the only result is a file, it will cd to the directory that contains it. If there are more than one results, you can refine your search by adding more arguments.
+Superlocate looks for a file / directory whose path contains all of the arguments passed. This way, you no longer need to remember where your files are; just remembering the name, as well as a few of the directories, in any order, will suffice.
 
 ### Examples
 #### Example 1
@@ -16,7 +15,7 @@ Let's say you're looking for a picture of the eiffel tower you took.
 
 `/home/user/photos/holidays/france-2010/eiffel-tower.jpg`
 
-Since there's only one result, you're instantly cd'd to the directory containing the file. The command effectively expanded to `cd /home/user/photos/holidays/france-2010/`, except that you didn't need to remember / browse your filesystem tree. No need to keep track of how your data was organized; it's enough to give a few arguments that describe the file you're looking for. Even if you went to France more often and you forgot in which year you took that picture, this works.
+Since there's only one result, you're instantly cd'd to the directory containing the file. The command effectively expanded to `cd /home/user/photos/holidays/france-2010/`, except that you didn't need to remember / browse your filesystem tree. No need to keep track of how your data was organized; it's enough to give a few arguments that describe the file you're looking for ('tags,' if you will). Even if you went to France more often and you forgot in which year you took that picture, this works.
 
 #### Example 2
 `user@localhost$ sl strawberry beatles`
@@ -87,7 +86,8 @@ sudo chmod +x /usr/bin/sl
  - The OS X version uses find because its locate doesn't take regex. It searches all files and folders in the working directory recursively.
 
 ### To-do
- - Automatically rearrange the arguments from bigger strings to fewer, in order to reduce search time. locate a | grep verylongstring takes longer than locate verylongstring | grep a, for example;
+ - Switch to using strigi / tracker as database?;
+ - Automatically rearrange the arguments from bigger strings to fewer, in order to reduce search time. Example: locate a | grep verylongstring takes longer than locate verylongstring | grep a;
  - if all results will bring you to the same directory, skip the dmenu and go to that directory immediately;
  - add command-line switches, for example if an operation must be case-sensitive, or only directories are to be located.
 
